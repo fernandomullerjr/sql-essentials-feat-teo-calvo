@@ -112,12 +112,265 @@ SQL não é case sensitive!
 
 
 
-- Adicionar mais uma condição
+- Adicionar mais uma condição, usando AND no caso:
 
 ~~~~SQL
 SELECT *
 FROM silver.pizza_query.pedido
 WHERE flKetchup = TRUE
-AND 
+AND descUF = 'Rio de Janeiro'
 ~~~~
+
+
+
+
+
+
+## COUNT
+
+- Efetuando uso da função COUNT:
+
+~~~~SQL
+SELECT count(*)  -- linhas não nulas
+FROM silver.pizza_query.pedido
+~~~~
+
+
+- Usando o count(1), o efeito é o mesmo:
+
+~~~~SQL
+SELECT count(1)  -- linhas não nulas
+FROM silver.pizza_query.pedido
+~~~~
+
+
+
+- Contando apenas por 1 coluna, o que reduz o consumo de CPU, pois faz uma contagem baseada em apenas 1 coluna:
+
+~~~~SQL
+SELECT count(idPedido)
+FROM silver.pizza_query.pedido
+~~~~
+
+
+
+
+
+
+
+
+- Filtrando para que não traga valores nulos:
+
+~~~~SQL
+SELECT *
+FROM silver.pizza_query.pedido
+WHERE flKetchup IS NOT null
+~~~~
+
+
+
+
+
+- Contando registros que não traga valores nulos:
+
+~~~~SQL
+SELECT count(*)
+FROM silver.pizza_query.pedido
+WHERE flKetchup IS NOT null
+~~~~
+
+
+
+
+
+- Selecionando pedidos do Paraná:
+
+~~~~SQL
+SELECT *
+FROM silver.pizza_query.pedido
+WHERE descUF = 'Paraná'
+~~~~
+
+
+
+- Contando pedidos do Paraná:
+
+~~~~SQL
+SELECT count(*)
+FROM silver.pizza_query.pedido
+WHERE descUF = 'Paraná'
+~~~~
+
+
+
+
+
+
+
+
+## GROUP BY
+
+agrupar
+
+- Agrupar por descUF
+
+~~~~SQL
+SELECT descUF,
+      count(*)
+FROM silver.pizza_query.pedido
+GROUP BY descUF
+~~~~
+
+
+descUF
+count(1)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+Santa Catarina
+46
+Mato Grosso do Sul
+6
+Goiás
+35
+Mato Grosso
+11
+Ceará
+44
+Piauí
+5
+
+
+
+
+
+
+- Ordenado decrescente:
+
+~~~~SQL
+SELECT descUF,
+      count(*)
+FROM silver.pizza_query.pedido
+GROUP BY descUF
+ORDER BY count(1) DESC
+~~~~
+
+
+
+
+
+- Selecionando e filtrando UF:
+
+~~~~SQL
+SELECT descUF,
+      count(*) AS qtdePedidos
+FROM silver.pizza_query.pedido
+
+WHERE descUF != 'São Paulo'
+
+GROUP BY descUF
+ORDER BY qtdePedidos DESC
+
+LIMIT 6
+~~~~
+
+
+
+
+
+
+
+
+
+
+## LIKE
+
+- Usando LIKE para filtrar:
+
+~~~~SQL
+SELECT *
+FROM silver.pizza_query.produto
+WHERE descItem LIKE 'suco%'
+~~~~
+
+
+- Evitar uso do LIKE, pois é muito custoso!
+- Evitar uso do LIKE, pois é muito custoso!
+- Evitar uso do LIKE, pois é muito custoso!
+- Evitar uso do LIKE, pois é muito custoso!
+- Evitar uso do LIKE, pois é muito custoso!
+
+
+
+- Usando LIKE para filtrar:
+
+~~~~SQL
+SELECT *
+FROM silver.pizza_query.produto
+WHERE descItem LIKE '%laranja%'
+~~~~
+
+
+
+- Usando LIKE para filtrar:
+
+~~~~SQL
+SELECT *
+FROM silver.pizza_query.produto
+WHERE descItem LIKE '%abacaxi%'
+~~~~
+
+
+
+
+
+
+
+
+- Filtrando por pedidos maiores que 75:
+usar o HAVING
+
+~~~~SQL
+SELECT descUF,
+      count(*) AS qtdePedidos
+FROM silver.pizza_query.pedido
+
+WHERE descUF != 'São Paulo'
+
+GROUP BY descUF
+
+HAVING qtdePedidos >= 75
+
+ORDER BY qtdePedidos DESC
+
+LIMIT 6
+~~~~
+
+descUF
+qtdePedidos
+1
+2
+3
+Rio de Janeiro
+103
+Minas Gerais
+92
+Paraná
+76
+
+
 
