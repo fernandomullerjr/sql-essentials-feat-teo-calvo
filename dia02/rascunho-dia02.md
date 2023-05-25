@@ -20,3 +20,50 @@ git push
 
 
 
+SELECT * FROM silver.pizza_query.pedido
+
+
+
+
+SELECT * FROM silver.pizza_query.produto
+
+
+
+- Selecionando apenas 1 coluna
+~~~~SQL
+SELECT descItem
+FROM silver.pizza_query.produto
+~~~~
+
+
+
+
+- Selecionando apenas várias colunas
+
+~~~~SQL
+SELECT descItem,
+        vlPreco
+FROM silver.pizza_query.produto
+~~~~
+
+
+
+
+- Simulando erro
+
+~~~~SQL
+SELECT descItem,
+        dtValidades
+FROM silver.pizza_query.produto
+~~~~
+
+
+- ERRO
+
+~~~~BASH
+Error in SQL statement: AnalysisException: [UNRESOLVED_COLUMN.WITH_SUGGESTION] A column or function parameter with name `dtValidades` cannot be resolved. Did you mean one of the following? [`silver`.`pizza_query`.`produto`.`descItem`, `silver`.`pizza_query`.`produto`.`vlPreco`].; line 2 pos 8;
+'Project [descItem#6244, 'dtValidades]
++- SubqueryAlias silver.pizza_query.produto
+   +- Relation silver.pizza_query.produto[descItem#6244,vlPreco#6245] parquet
+
+~~~~
