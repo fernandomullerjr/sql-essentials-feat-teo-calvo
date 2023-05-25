@@ -62,3 +62,7 @@ SELECT * FROM silver.pizza_query.pedido
 - Criar Github para Pam
 - Forkar pra ela
 - Configurar git no Databricks
+
+
+
+
