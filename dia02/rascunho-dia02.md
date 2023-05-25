@@ -67,3 +67,57 @@ Error in SQL statement: AnalysisException: [UNRESOLVED_COLUMN.WITH_SUGGESTION] A
    +- Relation silver.pizza_query.produto[descItem#6244,vlPreco#6245] parquet
 
 ~~~~
+
+
+
+
+
+
+
+
+- Selecionando apenas várias colunas
+
+~~~~SQL
+SELECT descItem,
+        vlPreco,
+        21 +21 AS vl42
+FROM silver.pizza_query.produto
+~~~~
+
+
+
+
+
+
+
+
+
+## WHERE
+
+- Selecionando pedidos que tenham Ketchup
+
+~~~~SQL
+SELECT *
+FROM silver.pizza_query.pedido
+WHERE flKetchup = TRUE
+~~~~
+
+
+COMANDOS
+SQL não é case sensitive!
+SQL não é case sensitive!
+SQL não é case sensitive!
+SQL não é case sensitive!
+
+
+
+
+- Adicionar mais uma condição
+
+~~~~SQL
+SELECT *
+FROM silver.pizza_query.pedido
+WHERE flKetchup = TRUE
+AND 
+~~~~
+
