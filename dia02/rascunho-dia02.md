@@ -374,3 +374,51 @@ Paraná
 
 
 
+
+
+- Sempre ao pensar em select, é colunas
+- Sempre ao pensar em select, é colunas
+- Sempre ao pensar em select, é colunas
+- Sempre ao pensar em select, é colunas
+
+
+
+
+
+~~~~SQL
+SELECT *
+FROM silver.pizza_query.pedido
+~~~~
+
+
+
+
+~~~~SQL
+SELECT descUF,
+    flKetchup,
+    count(*)
+FROM silver.pizza_query.pedido
+~~~~
+
+Error in SQL statement: AnalysisException: [MISSING_GROUP_BY] The query does not include a GROUP BY clause. Add GROUP BY or turn it into the window functions using OVER clauses.; line 1 pos 0;
+Aggregate [descUF#20770, flKetchup#20769, count(1) AS count(1)#20773L]
++- SubqueryAlias silver.pizza_query.pedido
+   +- Relation silver.pizza_query.pedido[idPedido#20767,dtPedido#20768,flKetchup#20769,descUF#20770,txtRecado#20771] parquet
+Command took 0.43 seconds -- by fernandomj90@gmail.com at 25/05/2023, 20:15:42 on 04 - Unity-Cluster
+Shift+Enter to run
+
+
+
+
+
+
+- 
+
+~~~~SQL
+SELECT descUF,
+    flKetchup,
+    count(*)
+FROM silver.pizza_query.pedido
+
+GROUP BY descUF, flKetchup
+~~~~
