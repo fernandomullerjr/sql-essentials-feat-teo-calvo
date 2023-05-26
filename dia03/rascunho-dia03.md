@@ -211,3 +211,352 @@ GROUP BY t1.idPedido
 
 
 - Apache Spark filtra antes de bater no S3.
+
+
+
+
+
+~~~~SQL
+SELECT *
+
+FROM silver.pizza_query.item_pedido
+
+~~~~
+
+
+
+
+
+
+- Trampo de corno
+
+
+~~~~SQL
+SELECT *
+
+FROM silver.pizza_query.item_pedido
+
+WHERE descTipoItem = 'borda'
+~~~~
+
+
+
+
+
+
+- Fazendo contagem
+
+
+~~~~SQL
+SELECT descItem,
+    count(*) AS qtdePedido
+
+FROM silver.pizza_query.item_pedido
+
+WHERE descTipoItem = 'borda'
+
+GROUP BY descItem
+ORDER BY qtdePedido DESC
+
+LIMIT 1
+~~~~
+
+
+
+
+
+
+- Massas mais pedidas
+
+
+~~~~SQL
+SELECT descItem,
+    count(*) AS qtdePedido
+
+FROM silver.pizza_query.item_pedido
+
+WHERE descTipoItem = 'massa'
+
+GROUP BY descItem
+ORDER BY qtdePedido DESC
+
+~~~~
+
+
+
+
+- Obtendo todos os queijos mais pedidos, usando LIKE
+
+~~~~SQL
+SELECT descItem,
+    count(*) AS qtdePedido
+
+FROM silver.pizza_query.item_pedido
+
+WHERE descTipoItem LIKE '%queijo%'
+
+GROUP BY descItem
+ORDER BY qtdePedido DESC
+
+~~~~
+
+
+
+
+
+
+
+- Obtendo todos os ingredientes mais pedidos, usando LIKE, fazendo o top 5 usando o LIMIT
+
+~~~~SQL
+SELECT descItem,
+    count(*) AS qtdePedido
+
+FROM silver.pizza_query.item_pedido
+
+WHERE descTipoItem LIKE '%ingrediente%'
+
+GROUP BY descItem
+ORDER BY qtdePedido DESC
+
+LIMIT 5
+~~~~
+
+
+
+
+
+
+
+
+## juntando tudo
+
+- Para juntar todos os top itens
+- Usar o "UNION ALL"
+
+~~~~SQL
+(SELECT descItem,
+    count(*) AS qtdePedido
+
+FROM silver.pizza_query.item_pedido
+
+WHERE descTipoItem LIKE '%ingrediente%'
+
+GROUP BY descItem
+ORDER BY qtdePedido DESC
+
+LIMIT 5)
+
+UNION ALL
+
+(SELECT descItem,
+    count(*) AS qtdePedido
+
+FROM silver.pizza_query.item_pedido
+
+WHERE descTipoItem LIKE '%queijo%'
+
+GROUP BY descItem
+ORDER BY qtdePedido DESC
+
+LIMIT 5)
+
+UNION ALL
+
+(SELECT descItem,
+    count(*) AS qtdePedido
+
+FROM silver.pizza_query.item_pedido
+
+WHERE descTipoItem LIKE '%ingrediente%'
+
+GROUP BY descItem
+ORDER BY qtdePedido DESC
+
+LIMIT 5)
+
+UNION ALL
+
+(SELECT descItem,
+    count(*) AS qtdePedido
+
+FROM silver.pizza_query.item_pedido
+
+WHERE descTipoItem LIKE '%bebida%'
+
+GROUP BY descItem
+ORDER BY qtdePedido DESC
+
+LIMIT 5)
+~~~~
+
+
+
+
+
+
+
+
+
+
+- Fazendo subquery
+
+
+~~~~SQL
+SELECT *
+FROM(
+
+    (SELECT descItem,
+        count(*) AS qtdePedido
+
+    FROM silver.pizza_query.item_pedido
+
+    WHERE descTipoItem LIKE '%ingrediente%'
+
+    GROUP BY descItem
+    ORDER BY qtdePedido DESC
+
+    LIMIT 5)
+
+    UNION ALL
+
+    (SELECT descItem,
+        count(*) AS qtdePedido
+
+    FROM silver.pizza_query.item_pedido
+
+    WHERE descTipoItem LIKE '%queijo%'
+
+    GROUP BY descItem
+    ORDER BY qtdePedido DESC
+
+    LIMIT 5)
+
+    UNION ALL
+
+    (SELECT descItem,
+        count(*) AS qtdePedido
+
+    FROM silver.pizza_query.item_pedido
+
+    WHERE descTipoItem LIKE '%ingrediente%'
+
+    GROUP BY descItem
+    ORDER BY qtdePedido DESC
+
+    LIMIT 5)
+
+    UNION ALL
+
+    (SELECT descItem,
+        count(*) AS qtdePedido
+
+    FROM silver.pizza_query.item_pedido
+
+    WHERE descTipoItem LIKE '%bebida%'
+
+    GROUP BY descItem
+    ORDER BY qtdePedido DESC
+
+    LIMIT 5)
+
+) AS t1
+
+LEFT JOIN 
+~~~~
+
+
+
+
+
+
+
+
+
+
+
+- Fazendo subquery
+
+
+~~~~SQL
+SELECT sum(vlPreco)
+
+FROM(
+
+    (SELECT descItem,
+        count(*) AS qtdePedido
+
+    FROM silver.pizza_query.item_pedido
+
+    WHERE descTipoItem LIKE '%ingrediente%'
+
+    GROUP BY descItem
+    ORDER BY qtdePedido DESC
+
+    LIMIT 5)
+
+    UNION ALL
+
+    (SELECT descItem,
+        count(*) AS qtdePedido
+
+    FROM silver.pizza_query.item_pedido
+
+    WHERE descTipoItem LIKE '%queijo%'
+
+    GROUP BY descItem
+    ORDER BY qtdePedido DESC
+
+    LIMIT 5)
+
+    UNION ALL
+
+    (SELECT descItem,
+        count(*) AS qtdePedido
+
+    FROM silver.pizza_query.item_pedido
+
+    WHERE descTipoItem LIKE '%ingrediente%'
+
+    GROUP BY descItem
+    ORDER BY qtdePedido DESC
+
+    LIMIT 5)
+
+    UNION ALL
+
+    (SELECT descItem,
+        count(*) AS qtdePedido
+
+    FROM silver.pizza_query.item_pedido
+
+    WHERE descTipoItem LIKE '%bebida%'
+
+    GROUP BY descItem
+    ORDER BY qtdePedido DESC
+
+    LIMIT 5)
+
+) AS t1
+
+LEFT JOIN 
+~~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+## PENDENTE
+- Repassar a parte sobre Subquery.
+- Repassar a parte sobre Subquery.
+- Repassar a parte sobre Subquery.
+- Repassar a parte sobre Subquery.
+- Repassar a parte sobre Subquery.
