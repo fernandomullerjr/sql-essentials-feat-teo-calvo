@@ -555,6 +555,10 @@ LEFT JOIN
 
 
 ## PENDENTE
+- Corrigir a query que usa UNION ALL.
+- Corrigir a query que usa UNION ALL.
+- Corrigir a query que usa UNION ALL.
+- Corrigir a query que usa UNION ALL.
 - Repassar a parte sobre Subquery.
 - Repassar a parte sobre Subquery.
 - Repassar a parte sobre Subquery.
